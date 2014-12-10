@@ -15,8 +15,9 @@ public class Dice
 	Random random = new Random();
 
 	// Constructor to initialize the number of dice to throw
-	public Dice() 
+	public Dice(int diceCount) 
 	{
+		numOfDice = diceCount;
 		numOfDice++;
 		dice1 = random.nextInt(6) + 1;
 		numOfDice++;
@@ -25,8 +26,12 @@ public class Dice
 		dice3 = random.nextInt(6) + 1;
 		
 		Roll = dice1 + dice2 + dice3;
-	} // end constructor Dice
+	} // end constructor
 	
+	public Dice() 
+	{
+	}
+
 	public void Throw()
 	{
 		diceSum = random.nextInt(Roll) + 1;
