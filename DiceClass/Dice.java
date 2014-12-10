@@ -3,7 +3,13 @@ import java.util.Random;
 
 public class Dice 
 {
-	int numOfDice;
+	int dice1 = 0;
+	int dice2 = 0;
+	int dice3 = 0;
+	int diceSum = 0;
+	static String lastDiceValue = null;
+	static int Roll = 0;
+	int numOfDice = 0;
 	private int faceValue; // current value showing on the dice
 	
 	Random random = new Random();
@@ -11,40 +17,44 @@ public class Dice
 	// Constructor to initialize the number of dice to throw
 	public Dice() 
 	{
-		faceValue = 0;
-	}
-	
-	public int Throw()
-	{
-		numOfDice = (int)(Math.random() * 3) + 1;
+		numOfDice++;
+		dice1 = random.nextInt(6) + 1;
+		numOfDice++;
+		dice2 = random.nextInt(6) + 1;
+		numOfDice++;
+		dice3 = random.nextInt(6) + 1;
 		
-		if(numOfDice == 1)
-			faceValue = (int)(Math.random() * 6) + 1;
-		else if(numOfDice == 2)
-			faceValue = (int)(Math.random() * 12) + 1;
-		else
-			faceValue = (int)(Math.random() * 18) + 1;
+		Roll = dice1 + dice2 + dice3;
+	} // end constructor Dice
+	
+	public void Throw()
+	{
+		diceSum = random.nextInt(Roll) + 1;
+	}
+	
+	public int getThrow(int num)
+	{
+		diceSum = Roll;
+		System.out.println("Sum of all dice = " + diceSum);
 		
-		return faceValue;
+		if(diceSum <= 3)
+		{
+			diceSum = 1;
+		}
+		else if(diceSum >=4)
+		{
+			diceSum = 6;
+		}
+		return diceSum;
 	}
-	
-	// Face Value mutator
-	public void setFaceValue(int value)
+		
+	// Returns a the number of dice rolled and the last value rolled
+	public String toString(int diceSum)
 	{
-		faceValue = value;
-	}
-	
-	// Face value setter
-	public int getFaceValue()
-	{
-		return faceValue;
-	}
-	
-	// Returns a string representation of the dice
-	public String toString()
-	{
-		String result = Integer.toString(numOfDice);
-		return result;
-	}
-
-}
+		numOfDice = diceSum;
+		System.out.println("\nThe number of dices = " + numOfDice);
+		lastDiceValue = Integer.toString(Roll);
+		System.out.println("The last roll value = " + lastDiceValue);
+		return lastDiceValue;
+	} // end toString method
+} // end class Dice
